@@ -1,0 +1,48 @@
+# ============================================================================
+# Energy Demand Forecasting - Python Dependencies
+# ============================================================================
+# Install: pip install -r requirements.txt
+
+# Core utilities
+python-dotenv==1.0.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+pyyaml==6.0.1
+
+# Web framework
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+python-multipart==0.0.6
+
+# Database
+sqlalchemy==2.0.25
+psycopg2-binary==2.9.9
+asyncpg==0.29.0
+
+# Data processing
+pandas==2.2.0
+numpy==1.26.3
+pyarrow==15.0.0
+
+# ML frameworks (start with basics)
+scikit-learn==1.4.0
+xgboost==2.0.3
+
+# API clients
+requests==2.31.0
+aiohttp==3.9.1
+
+# Testing
+pytest==8.0.0
+pytest-asyncio==0.23.5
+pytest-cov==4.1.0
+
+# Code quality
+black==24.1.1
+isort==5.13.2
+flake8==7.0.0
+
+# Utilities
+click==8.1.7
+python-dateutil==2.8.2
+pytz==2024.1

@@ -1,0 +1,171 @@
+# ============================================================================
+# Energy Demand Forecasting - Configuration File
+# ============================================================================
+
+# Database Configuration
+database:
+  host: ${DB_HOST:-localhost}
+  port: ${DB_PORT:-5432}
+  name: ${DB_NAME:-energy_forecasting}
+  user: ${DB_USER:-ml_app_user}
+  password: ${DB_PASSWORD:-devpassword123}
+  pool_size: 10
+  max_overflow: 20
+
+# Redis Configuration
+redis:
+  host: ${REDIS_HOST:-localhost}
+  port: ${REDIS_PORT:-6379}
+  password: ${REDIS_PASSWORD:-redispassword123}
+  db: 0
+
+# MLflow Configuration
+mlflow:
+  tracking_uri: ${MLFLOW_TRACKING_URI:-http://localhost:5000}
+  experiment_name: ${MLFLOW_EXPERIMENT:-energy_demand_forecasting}
+  registry_uri: ${MLFLOW_REGISTRY_URI:-sqlite:///mlflow.db}
+  model_name: energy_demand_model
+
+# API Configuration
+api:
+  host: ${API_HOST:-0.0.0.0}
+  port: ${API_PORT:-8000}
+  reload: ${API_RELOAD:-true}
+  workers: ${API_WORKERS:-4}
+  log_level: ${LOG_LEVEL:-info}
+
+# Data Ingestion Configuration
+data_ingestion:
+  weather:
+    api_key: ${WEATHER_API_KEY:-your_api_key_here}
+    api_url: ${WEATHER_API_URL:-https://api.openweathermap.org/data/2.5}
+    location: ${WEATHER_LOCATION:-London,UK}
+    update_interval_minutes: 60
+    retry_attempts: 3
+    retry_delay_seconds: 5
+  
+  energy:
+    api_url: ${ENERGY_API_URL:-https://api.example.com/energy}
+    api_key: ${ENERGY_API_KEY:-your_api_key_here}
+    update_interval_minutes: 15
+    retry_attempts: 3
+    retry_delay_seconds: 5
+    use_entsoe: ${USE_ENTSOE:-true}  # Use ENTSO-E API if available
+  
+  # ENTSO-E Transparency Platform API Configuration
+  entsoe:
+    api_url: ${ENTSOE_API_URL:-https://web-api.tp.entsoe.eu/api}
+    api_key: ${ENTSOE_API_KEY:-your_entsoe_api_key_here}
+    default_domain: ${ENTSOE_DEFAULT_DOMAIN:-FR}  # Country code: FR, DE, IT, ES, etc.
+    retry_attempts: 3
+    retry_delay_seconds: 5
+
+# Feature Engineering Configuration
+feature_engineering:
+  lags:
+    - 1    # 1 hour lag
+    - 7    # 7 hours lag
+    - 24   # 24 hours lag (daily)
+    - 168  # 168 hours lag (weekly)
+  
+  rolling_windows:
+    - 7    # 7 hours rolling average
+    - 24   # 24 hours rolling average
+    - 168  # 168 hours rolling average (weekly)
+  
+  time_features:
+    include_hour: true
+    include_day_of_week: true
+    include_day_of_month: true
+    include_month: true
+    include_is_weekend: true
+    include_is_holiday: true
+  
+  weather_features:
+    include_temperature: true
+    include_humidity: true
+    include_pressure: true
+    include_wind_speed: true
+    rolling_avg_window: 24
+
+# Model Configuration
+model:
+  # XGBoost parameters
+  xgboost:
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+    min_child_weight: 3
+    random_state: 42
+  
+  # LightGBM parameters
+  lightgbm:
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+  
+  # Prophet parameters
+  prophet:
+    yearly_seasonality: true
+    weekly_seasonality: true
+    daily_seasonality: true
+    seasonality_mode: 'multiplicative'
+  
+  # Training parameters
+  training:
+    test_size: 0.2
+    validation_size: 0.1
+    cv_folds: 5
+    early_stopping_rounds: 10
+    random_state: 42
+
+# Hyperparameter Tuning (Optuna)
+hyperparameter_tuning:
+  enabled: true
+  n_trials: 50
+  timeout_minutes: 60
+  direction: minimize  # minimize for metrics like RMSE, MAE
+  metric: rmse
+
+# Monitoring Configuration
+monitoring:
+  # Model performance thresholds
+  performance:
+    min_r2_score: 0.7
+    max_rmse: 100.0
+    max_mae: 50.0
+    max_mape: 0.15  # 15%
+  
+  # Data quality thresholds
+  data_quality:
+    max_missing_percentage: 0.05  # 5%
+    max_outlier_percentage: 0.02   # 2%
+    min_records_per_day: 20
+  
+  # Prediction monitoring
+  prediction:
+    max_prediction_error: 200.0
+    alert_on_high_error: true
+    error_threshold_percentage: 0.20  # 20%
+
+# Airflow Configuration
+airflow:
+  dag_owner: airflow
+  default_retries: 2
+  retry_delay_minutes: 5
+  email_on_failure: false
+  email_on_retry: false
+
+# Logging Configuration
+logging:
+  level: ${LOG_LEVEL:-INFO}
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: logs/energy_forecasting.log
+  max_bytes: 10485760  # 10MB
+  backup_count: 5
+

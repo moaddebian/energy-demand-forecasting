@@ -1,0 +1,117 @@
+{
+  "prediction_single": {
+    "endpoint": "POST /predict",
+    "request_body": {
+      "features": [
+        950.0,
+        980.0,
+        1020.0,
+        1050.0,
+        990.0,
+        1005.0,
+        1010.0,
+        25.5,
+        30.2,
+        14,
+        1,
+        4,
+        1,
+        0,
+        0,
+        20.5,
+        65.0,
+        1013.25,
+        10.5,
+        20.0,
+        65.0
+      ],
+      "model_name": "xgboost"
+    },
+    "expected_response": {
+      "prediction": 1052.32,
+      "model_name": "energy_demand_model",
+      "model_version": "a8fc3510",
+      "timestamp": "2026-01-04T..."
+    }
+  },
+  "prediction_batch": {
+    "endpoint": "POST /predict/batch",
+    "request_body": {
+      "features_list": [
+        [
+          950.0,
+          980.0,
+          1020.0,
+          1050.0,
+          990.0,
+          1005.0,
+          1010.0,
+          25.5,
+          30.2,
+          14,
+          1,
+          4,
+          1,
+          0,
+          0,
+          20.5,
+          65.0,
+          1013.25,
+          10.5,
+          20.0,
+          65.0
+        ],
+        [
+          960.0,
+          990.0,
+          1030.0,
+          1060.0,
+          1000.0,
+          1015.0,
+          1020.0,
+          26.0,
+          31.0,
+          15,
+          2,
+          5,
+          1,
+          0,
+          0,
+          21.0,
+          66.0,
+          1014.0,
+          11.0,
+          21.0,
+          66.0
+        ]
+      ]
+    }
+  },
+  "features_description": {
+    "count": 21,
+    "order": [
+      "lag_1 - Demande il y a 1 heure",
+      "lag_7 - Demande il y a 7 heures",
+      "lag_24 - Demande il y a 24 heures",
+      "lag_168 - Demande il y a 168 heures (1 semaine)",
+      "rolling_avg_7 - Moyenne mobile sur 7 heures",
+      "rolling_avg_24 - Moyenne mobile sur 24 heures",
+      "rolling_avg_168 - Moyenne mobile sur 168 heures",
+      "rolling_std_7 - Écart-type sur 7 heures",
+      "rolling_std_24 - Écart-type sur 24 heures",
+      "hour - Heure du jour (0-23)",
+      "day_of_week - Jour de la semaine (0-6)",
+      "day_of_month - Jour du mois (1-31)",
+      "month - Mois (1-12)",
+      "is_weekend - Weekend? (0 ou 1)",
+      "is_holiday - Jour férié? (0 ou 1)",
+      "temperature - Température (°C)",
+      "humidity - Humidité (%)",
+      "pressure - Pression (hPa)",
+      "wind_speed - Vitesse du vent (m/s)",
+      "temp_rolling_avg_24 - Température moyenne sur 24h",
+      "humidity_rolling_avg_24 - Humidité moyenne sur 24h"
+    ]
+  }
+}
+

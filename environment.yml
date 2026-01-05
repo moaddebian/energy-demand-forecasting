@@ -1,0 +1,86 @@
+# ============================================================================
+# Energy Demand Forecasting - Conda Environment Configuration
+# ============================================================================
+# Create environment: conda env create -f environment.yml
+# Update environment: conda env update -f environment.yml
+# Activate: conda activate energy-forecasting
+
+name: energy-forecasting
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  # Python version
+  - python=3.11
+
+  # Core data science packages (install via conda for better compatibility)
+  - numpy=1.26
+  - pandas=2.2
+  - scikit-learn=1.4
+  - scipy=1.11
+  - matplotlib=3.8
+  - seaborn=0.13
+  - jupyter=1.0
+  - jupyterlab=4.0
+  - ipython=8.20
+
+  # Database
+  - sqlalchemy=2.0
+  - psycopg2=2.9
+
+  # Utilities
+  - pyyaml=6.0
+  - python-dateutil=2.8
+  - pytz=2024.1
+  - requests=2.31
+
+  # Code quality
+  - black=24.1
+  - isort=5.13
+  - flake8=7.0
+  - pytest=8.0
+  - pytest-cov=4.1
+
+  # Install these with pip (not available or better via pip)
+  - pip
+  - pip:
+    # Core utilities
+    - python-dotenv==1.0.0
+    - pydantic==2.5.0
+    - pydantic-settings==2.1.0
+    
+    # Web framework
+    - fastapi==0.109.0
+    - uvicorn[standard]==0.27.0
+    - python-multipart==0.0.6
+    
+    # Database extras
+    - asyncpg==0.29.0
+    
+    # Data processing
+    - pyarrow==15.0.0
+    
+    # ML frameworks
+    - xgboost==2.0.3
+    - lightgbm==4.3.0
+    - prophet==1.1.5
+    - optuna==3.5.0
+    
+    # MLOps
+    - mlflow==2.10.2
+    
+    # Workflow orchestration
+    - apache-airflow==2.8.0
+    
+    # API clients
+    - aiohttp==3.9.1
+    
+    # Testing extras
+    - pytest-asyncio==0.23.4
+    - httpx==0.26.0
+    
+    # Utilities
+    - click==8.1.7
+    - tqdm==4.66.1
