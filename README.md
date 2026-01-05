@@ -326,13 +326,11 @@ energy-demand-forecasting/
 │   └── training/                     # Entraînement modèles
 │       └── trainer.py                # Pipeline d'entraînement
 ├── 📂 tests/                          # Tests unitaires
-│   ├── conftest.py                   # Configuration pytest
 │   ├── unit/                         # Tests unitaires
 │   └── integration/                  # Tests d'intégration
 ├── docker-compose.yml                # Services Docker
 ├── environment.yml                    # Environnement Conda
 ├── README.md                          # Ce fichier
-├── ENTSOE_SETUP.md                    # Guide ENTSO-E
 ├── EXPLAIN.md                         # Guide complet du projet
 └── PROJECT_SUMMARY.md                 # Résumé du projet
 ```
